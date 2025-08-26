@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFFPT PRO - Gestion d'Études</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-gray-800 border-b border-gray-700 px-4 py-3 sticky top-0 z-40">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-blue-400 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-white">OFFPT PRO</h1>
+                </div>
+            </div>
+            <button id="export-btn"
+                class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                <i class="fas fa-download"></i>
+                <span class="hidden sm:inline">Exporter</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation Horizontale -->
+    <nav class="bg-gray-800 border-b border-gray-700 sticky top-16 z-30">
+        <!-- Desktop Navigation -->
+        <div class="hidden md:block">
+            <div class="flex items-center justify-center space-x-1 px-4 py-2">
+                <a href="#"
+                    class="nav-link active flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Tableau de Bord</span>
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="tasks">
+                    <i class="fas fa-tasks"></i>
+                    <span>Tâches</span>
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="planning">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Planning</span>
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="modules">
+                    <i class="fas fa-book"></i>
+                    <span>Modules</span>
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="notes">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Notes</span>
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </a>
+                <a href="#"
+                    class="nav-link flex items-center space-x-2 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors text-sm"
+                    data-tab="about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>À propos</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-nav"
+            class="mobile-menu fixed top-0 left-0 h-full w-64 bg-gray-800 z-50 border-r border-gray-700 overflow-y-auto md:hidden">
+            <div class="p-4">
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white"></i>
+                        </div>
+                        <h1 class="text-lg font-bold text-white">OFFPT PRO</h1>
+                    </div>
+                    <button id="close-mobile-menu" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <ul class="space-y-2">
+                    <li><a href="#"
+                            class="nav-link active flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="dashboard">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Tableau de Bord</span>
+                        </a></li>
+                    <li><a href="#"
+                            class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="tasks">
+                            <i class="fas fa-tasks"></i>
+                            <span>Tâches</span>
+                        </a></li>
+                    <li><a href="#"
+                            class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="planning">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Planning</span>
+                        </a></li>
+                    <li><a href="#"
+                            class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="modules">
+                            <i class="fas fa-book"></i>
+                            <span>Modules</span>
+                        </a></li>
+                    <li><a href="#"
+                            class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="notes">
+                            <i class="fas fa-sticky-note"></i>
+                            <span>Notes</span>
+                        </a></li>
+                    <li><a href="#"
+                            class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Paramètres</span>
+                        </a></li>
+                    <li><a href="#"
+                            class="nav-link flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-700 transition-colors"
+                            data-tab="about">
+                            <i class="fas fa-info-circle"></i>
+                            <span>À propos</span>
+                        </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="p-4 md:p-6 overflow-auto">
+        <!-- Dashboard Tab -->
+        <div id="dashboard-tab" class="tab-content fade-in">
+            <h2 class="text-2xl font-bold mb-6">Tableau de Bord</h2>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700 hover-scale">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Tâches Complétées</p>
+                            <p id="completed-tasks-stat" class="text-xl md:text-2xl font-bold text-green-400">0</p>
+                        </div>
+                        <i class="fas fa-check-circle text-2xl md:text-3xl text-green-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700 hover-scale">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Heures d'Étude</p>
+                            <p id="study-hours-stat" class="text-xl md:text-2xl font-bold text-blue-400">0h</p>
+                        </div>
+                        <i class="fas fa-clock text-2xl md:text-3xl text-blue-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700 hover-scale">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Moyenne Générale</p>
+                            <p id="general-average-stat" class="text-xl md:text-2xl font-bold text-purple-400">--/20</p>
+                        </div>
+                        <i class="fas fa-star text-2xl md:text-3xl text-purple-400"></i>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700 hover-scale">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-400 text-sm">Modules Actifs</p>
+                            <p id="active-modules-stat" class="text-xl md:text-2xl font-bold text-yellow-400">14</p>
+                        </div>
+                        <i class="fas fa-book-open text-2xl md:text-3xl text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Répartition des Tâches</h3>
+                    <div class="chart-container">
+                        <canvas id="tasksChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Performance par Module</h3>
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Planning Journalier</h3>
+                    <div class="chart-container">
+                        <canvas id="scheduleChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Analyse du Sommeil</h3>
+                    <div class="chart-container">
+                        <canvas id="sleepChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="mt-6 bg-gray-800 p-4 md:p-6 rounded-lg border border-gray-700">
+                <h3 class="text-lg font-semibold mb-4">Activité Récente</h3>
+                <div id="recent-activity" class="space-y-3">
+                    <!-- Recent activity will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Tab -->
+        <div id="tasks-tab" class="tab-content hidden">
+            <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+                <h2 class="text-2xl font-bold">Gestion des Tâches</h2>
+                <button id="add-task-btn"
+                    class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                    <i class="fas fa-plus"></i>
+                    <span>Nouvelle Tâche</span>
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-4 mb-6">
+                <select id="priority-filter" class="bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm">
+                    <option value="">Toutes les priorités</option>
+                    <option value="high">Haute</option>
+                    <option value="medium">Moyenne</option>
+                    <option value="low">Basse</option>
+                </select>
+                <select id="status-filter" class="bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm">
+                    <option value="">Tous les statuts</option>
+                    <option value="false">En attente</option>
+                    <option value="true">Terminé</option>
+                </select>
+                <select id="module-filter" class="bg-gray-800 border border-gray-600 rounded-lg px-3 py-2 text-sm">
+                    <option value="">Tous les modules</option>
+                </select>
+            </div>
+
+            <!-- Tasks List -->
+            <div id="tasks-list" class="space-y-4">
+                <!-- Tasks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Planning Tab -->
+        <div id="planning-tab" class="tab-content hidden">
+            <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 space-y-4 sm:space-y-0">
+                <h2 class="text-2xl font-bold">Planning Intelligent</h2>
+                <div class="flex items-center space-x-4">
+                    <button id="prev-day" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span id="current-date"
+                        class="text-lg font-semibold bg-gray-800 px-4 py-2 rounded-lg border border-gray-600"></span>
+                    <button id="next-day" class="bg-blue-600 hover:bg-blue-700 p-3 rounded-lg transition-colors">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Planning Analysis -->
+            <div class="mb-6 bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4 text-white">📊 Analyse du Planning</h3>
+                <div id="planning-analysis" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <!-- Analysis will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Planning Timeline -->
+            <div class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+                <div class="bg-gray-700 px-6 py-4 border-b border-gray-600">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i class="fas fa-clock mr-2 text-blue-400"></i>
+                        Planning de la Journée
+                    </h3>
+                </div>
+
+                <div class="p-6">
+                    <div id="schedule-timeline" class="space-y-2">
+                        <!-- Schedule will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Légende -->
+                <div class="bg-gray-700 px-6 py-4 border-t border-gray-600">
+                    <h4 class="text-lg font-semibold mb-3 flex items-center">
+                        <i class="fas fa-info-circle mr-2 text-yellow-400"></i>
+                        Légende
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-amber-500"></div>
+                            <span>Réveil/Coucher</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-gray-500"></div>
+                            <span>Sommeil</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-purple-500"></div>
+                            <span>Tâches programmées</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-orange-500"></div>
+                            <span>Pause déjeuner</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-blue-500"></div>
+                            <span>Heures d'école</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-green-500"></div>
+                            <span>Temps libre</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full bg-gray-600"></div>
+                            <span>Temps écoulé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modules Tab -->
+        <div id="modules-tab" class="tab-content hidden">
+            <h2 class="text-2xl font-bold mb-6">Modules OFPPT</h2>
+
+            <div id="modules-list" class="space-y-6">
+                <!-- Modules will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Notes Tab -->
+        <div id="notes-tab" class="tab-content hidden">
+            <h2 class="text-2xl font-bold mb-6">Gestion des Notes</h2>
+
+            <!-- Moyenne Générale -->
+            <div class="mb-6 bg-gradient-to-r from-purple-600 to-blue-600 p-6 rounded-lg text-center">
+                <h3 class="text-2xl font-bold mb-2">Moyenne Générale</h3>
+                <div id="general-average-display" class="text-4xl font-bold">--/20</div>
+                <p class="text-sm opacity-90 mt-2">Calculée automatiquement selon les coefficients OFPPT</p>
+            </div>
+
+            <!-- Notes Grid Table -->
+            <div class="bg-gray-800 rounded-lg border border-gray-700 overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-700">
+                        <tr>
+                            <th class="px-4 py-3 text-left font-semibold">Code Module</th>
+                            <th class="px-4 py-3 text-left font-semibold">Nom Module</th>
+                            <th class="px-4 py-3 text-center font-semibold">Contrôle 1</th>
+                            <th class="px-4 py-3 text-center font-semibold">Contrôle 2</th>
+                            <th class="px-4 py-3 text-center font-semibold">Contrôle 3</th>
+                            <th class="px-4 py-3 text-center font-semibold">Contrôle 4</th>
+                            <th class="px-4 py-3 text-center font-semibold">Contrôle 5</th>
+                            <th class="px-4 py-3 text-center font-semibold">EFM</th>
+                            <th class="px-4 py-3 text-center font-semibold">Moyenne</th>
+                            <th class="px-4 py-3 text-center font-semibold">Coeff</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notes-table-body" class="divide-y divide-gray-600">
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings-tab" class="tab-content hidden">
+            <h2 class="text-2xl font-bold mb-6">Paramètres</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Horaires Personnels</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Heure de réveil</label>
+                            <select id="wake-time"
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                                <option value="00:00">00:00</option>
+                                <option value="00:30">00:30</option>
+                                <option value="01:00">01:00</option>
+                                <option value="01:30">01:30</option>
+                                <option value="02:00">02:00</option>
+                                <option value="02:30">02:30</option>
+                                <option value="03:00">03:00</option>
+                                <option value="03:30">03:30</option>
+                                <option value="04:00">04:00</option>
+                                <option value="04:30">04:30</option>
+                                <option value="05:00">05:00</option>
+                                <option value="05:30">05:30</option>
+                                <option value="06:00">06:00</option>
+                                <option value="06:30">06:30</option>
+                                <option value="07:00">07:00</option>
+                                <option value="07:30">07:30</option>
+                                <option value="08:00">08:00</option>
+                                <option value="08:30">08:30</option>
+                                <option value="09:00">09:00</option>
+                                <option value="09:30">09:30</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                                <option value="16:30">16:30</option>
+                                <option value="17:00">17:00</option>
+                                <option value="17:30">17:30</option>
+                                <option value="18:00">18:00</option>
+                                <option value="18:30">18:30</option>
+                                <option value="19:00">19:00</option>
+                                <option value="19:30">19:30</option>
+                                <option value="20:00">20:00</option>
+                                <option value="20:30">20:30</option>
+                                <option value="21:00">21:00</option>
+                                <option value="21:30">21:30</option>
+                                <option value="22:00">22:00</option>
+                                <option value="22:30">22:30</option>
+                                <option value="23:00">23:00</option>
+                                <option value="23:30">23:30</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Heure de coucher</label>
+                            <select id="bed-time"
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                                <option value="00:00">00:00</option>
+                                <option value="00:30">00:30</option>
+                                <option value="01:00">01:00</option>
+                                <option value="01:30">01:30</option>
+                                <option value="02:00">02:00</option>
+                                <option value="02:30">02:30</option>
+                                <option value="03:00">03:00</option>
+                                <option value="03:30">03:30</option>
+                                <option value="04:00">04:00</option>
+                                <option value="04:30">04:30</option>
+                                <option value="05:00">05:00</option>
+                                <option value="05:30">05:30</option>
+                                <option value="06:00">06:00</option>
+                                <option value="06:30">06:30</option>
+                                <option value="07:00">07:00</option>
+                                <option value="07:30">07:30</option>
+                                <option value="08:00">08:00</option>
+                                <option value="08:30">08:30</option>
+                                <option value="09:00">09:00</option>
+                                <option value="09:30">09:30</option>
+                                <option value="10:00">10:00</option>
+                                <option value="10:30">10:30</option>
+                                <option value="11:00">11:00</option>
+                                <option value="11:30">11:30</option>
+                                <option value="12:00">12:00</option>
+                                <option value="12:30">12:30</option>
+                                <option value="13:00">13:00</option>
+                                <option value="13:30">13:30</option>
+                                <option value="14:00">14:00</option>
+                                <option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option>
+                                <option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option>
+                                <option value="16:30">16:30</option>
+                                <option value="17:00">17:00</option>
+                                <option value="17:30">17:30</option>
+                                <option value="18:00">18:00</option>
+                                <option value="18:30">18:30</option>
+                                <option value="19:00">19:00</option>
+                                <option value="19:30">19:30</option>
+                                <option value="20:00">20:00</option>
+                                <option value="20:30">20:30</option>
+                                <option value="21:00">21:00</option>
+                                <option value="21:30">21:30</option>
+                                <option value="22:00">22:00</option>
+                                <option value="22:30">22:30</option>
+                                <option value="23:00">23:00</option>
+                                <option value="23:30">23:30</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Objectif d'étude (heures/jour)</label>
+                            <input type="number" id="study-goal" min="1" max="16"
+                                class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Horaires d'École</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" id="has-school"
+                                    class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded">
+                                <span>J'ai des cours à l'école</span>
+                            </label>
+                        </div>
+                        <div id="school-times" class="hidden space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Début des cours</label>
+                                <select id="school-start"
+                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                                    <option value="00:00">00:00</option>
+                                    <option value="00:30">00:30</option>
+                                    <option value="01:00">01:00</option>
+                                    <option value="01:30">01:30</option>
+                                    <option value="02:00">02:00</option>
+                                    <option value="02:30">02:30</option>
+                                    <option value="03:00">03:00</option>
+                                    <option value="03:30">03:30</option>
+                                    <option value="04:00">04:00</option>
+                                    <option value="04:30">04:30</option>
+                                    <option value="05:00">05:00</option>
+                                    <option value="05:30">05:30</option>
+                                    <option value="06:00">06:00</option>
+                                    <option value="06:30">06:30</option>
+                                    <option value="07:00">07:00</option>
+                                    <option value="07:30">07:30</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                    <option value="21:30">21:30</option>
+                                    <option value="22:00">22:00</option>
+                                    <option value="22:30">22:30</option>
+                                    <option value="23:00">23:00</option>
+                                    <option value="23:30">23:30</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Fin des cours</label>
+                                <select id="school-end"
+                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                                    <option value="00:00">00:00</option>
+                                    <option value="00:30">00:30</option>
+                                    <option value="01:00">01:00</option>
+                                    <option value="01:30">01:30</option>
+                                    <option value="02:00">02:00</option>
+                                    <option value="02:30">02:30</option>
+                                    <option value="03:00">03:00</option>
+                                    <option value="03:30">03:30</option>
+                                    <option value="04:00">04:00</option>
+                                    <option value="04:30">04:30</option>
+                                    <option value="05:00">05:00</option>
+                                    <option value="05:30">05:30</option>
+                                    <option value="06:00">06:00</option>
+                                    <option value="06:30">06:30</option>
+                                    <option value="07:00">07:00</option>
+                                    <option value="07:30">07:30</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                    <option value="21:30">21:30</option>
+                                    <option value="22:00">22:00</option>
+                                    <option value="22:30">22:30</option>
+                                    <option value="23:00">23:00</option>
+                                    <option value="23:30">23:30</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700">
+                    <h3 class="text-lg font-semibold mb-4">Pause Déjeuner</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" id="has-lunch-break"
+                                    class="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded">
+                                <span>J'ai une pause déjeuner</span>
+                            </label>
+                        </div>
+                        <div id="lunch-break-time" class="hidden space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Début de la pause</label>
+                                <select id="lunch-start"
+                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                                    <option value="00:00">00:00</option>
+                                    <option value="00:30">00:30</option>
+                                    <option value="01:00">01:00</option>
+                                    <option value="01:30">01:30</option>
+                                    <option value="02:00">02:00</option>
+                                    <option value="02:30">02:30</option>
+                                    <option value="03:00">03:00</option>
+                                    <option value="03:30">03:30</option>
+                                    <option value="04:00">04:00</option>
+                                    <option value="04:30">04:30</option>
+                                    <option value="05:00">05:00</option>
+                                    <option value="05:30">05:30</option>
+                                    <option value="06:00">06:00</option>
+                                    <option value="06:30">06:30</option>
+                                    <option value="07:00">07:00</option>
+                                    <option value="07:30">07:30</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                    <option value="21:30">21:30</option>
+                                    <option value="22:00">22:00</option>
+                                    <option value="22:30">22:30</option>
+                                    <option value="23:00">23:00</option>
+                                    <option value="23:30">23:30</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Fin de la pause</label>
+                                <select id="lunch-end"
+                                    class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                                    <option value="00:00">00:00</option>
+                                    <option value="00:30">00:30</option>
+                                    <option value="01:00">01:00</option>
+                                    <option value="01:30">01:30</option>
+                                    <option value="02:00">02:00</option>
+                                    <option value="02:30">02:30</option>
+                                    <option value="03:00">03:00</option>
+                                    <option value="03:30">03:30</option>
+                                    <option value="04:00">04:00</option>
+                                    <option value="04:30">04:30</option>
+                                    <option value="05:00">05:00</option>
+                                    <option value="05:30">05:30</option>
+                                    <option value="06:00">06:00</option>
+                                    <option value="06:30">06:30</option>
+                                    <option value="07:00">07:00</option>
+                                    <option value="07:30">07:30</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="08:30">08:30</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="09:30">09:30</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="10:30">10:30</option>
+                                    <option value="11:00">11:00</option>
+                                    <option value="11:30">11:30</option>
+                                    <option value="12:00">12:00</option>
+                                    <option value="12:30">12:30</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="13:30">13:30</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="14:30">14:30</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="15:30">15:30</option>
+                                    <option value="16:00">16:00</option>
+                                    <option value="16:30">16:30</option>
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00">18:00</option>
+                                    <option value="18:30">18:30</option>
+                                    <option value="19:00">19:00</option>
+                                    <option value="19:30">19:30</option>
+                                    <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
+                                    <option value="21:00">21:00</option>
+                                    <option value="21:30">21:30</option>
+                                    <option value="22:00">22:00</option>
+                                    <option value="22:30">22:30</option>
+                                    <option value="23:00">23:00</option>
+                                    <option value="23:30">23:30</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-gray-800 p-6 rounded-lg border border-gray-700">
+                <h3 class="text-lg font-semibold mb-4">Gestion des Données</h3>
+                <div class="flex flex-wrap gap-4">
+                    <button id="save-settings-btn"
+                        class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-save"></i>
+                        <span>Sauvegarder</span>
+                    </button>
+                    <button id="export-data-btn"
+                        class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-download"></i>
+                        <span>Exporter</span>
+                    </button>
+                    <button id="import-data-btn"
+                        class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-upload"></i>
+                        <span>Importer</span>
+                    </button>
+                    <button id="reset-data-btn"
+                        class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2">
+                        <i class="fas fa-trash"></i>
+                        <span>Réinitialiser</span>
+                    </button>
+                    <input type="file" id="import-file" accept=".json" class="hidden">
+                </div>
+            </div>
+        </div>
+
+        <!-- About Tab -->
+        <div id="about-tab" class="tab-content hidden">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <div
+                        class="w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🎓</span>
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">Student Planner Pro</h2>
+                    <p class="text-gray-400 text-lg">Votre assistant d'études intelligent</p>
+                </div>
+
+                <!-- Fonctionnalités principales -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-400">Fonctionnalités principales</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Gestion complète des tâches et projets</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Planning journalier intelligent</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Suivi des modules académiques</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Gestion des notes et moyennes</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Analyse du sommeil et bien-être</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-400"></i>
+                            <span>Tableaux de bord et statistiques</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pourquoi Student Planner Pro -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-purple-400">Pourquoi Student Planner Pro ?</h3>
+                    <p class="text-gray-300 mb-4">
+                        Conçu spécialement pour les étudiants modernes, Student Planner Pro combine simplicité
+                        d'utilisation et fonctionnalités avancées pour vous aider à organiser efficacement vos études.
+                    </p>
+                    <p class="text-gray-300">
+                        Que vous soyez en école, université ou formation professionnelle, cette plateforme s'adapte à
+                        vos besoins et vous accompagne dans votre réussite académique.
+                    </p>
+                </div>
+
+                <!-- Avantages -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 text-center">
+                        <i class="fas fa-chart-line text-3xl text-blue-400 mb-3"></i>
+                        <h4 class="font-semibold text-blue-400 mb-2">Suivi en temps réel</h4>
+                        <p class="text-sm text-gray-300">Visualisez vos progrès avec des graphiques interactifs mis à
+                            jour automatiquement</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 text-center">
+                        <i class="fas fa-mobile-alt text-3xl text-green-400 mb-3"></i>
+                        <h4 class="font-semibold text-green-400 mb-2">Interface responsive</h4>
+                        <p class="text-sm text-gray-300">Accédez à vos données depuis n'importe quel appareil, partout
+                            et à tout moment</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 text-center">
+                        <i class="fas fa-shield-alt text-3xl text-purple-400 mb-3"></i>
+                        <h4 class="font-semibold text-purple-400 mb-2">Données sécurisées</h4>
+                        <p class="text-sm text-gray-300">Vos informations sont stockées localement et peuvent être
+                            exportées à tout moment</p>
+                    </div>
+                </div>
+
+                <!-- Créateur -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold mb-6 text-yellow-400 text-center">Créateur de la plateforme</h3>
+                    <div class="flex justify-center">
+                        <div class="creator-card-container">
+                            <div class="creator-card">
+                                <!-- Face avant -->
+                                <div class="creator-card-front">
+                                    <div class="creator-avatar">
+                                        <img src="club memebres.png" alt=""
+                                            class="w-32 h-32 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-2xl">
+                                    </div>
+                                    <div class="creator-info">
+                                        <h4 class="text-2xl font-bold text-white mb-2">Abd El Monim Mazgoura</h4>
+                                        <p class="text-yellow-400 font-medium mb-1">19 ans</p>
+                                        <p class="text-gray-300 text-sm">Né le 30/01/2006</p>
+                                        <p class="text-gray-400 text-sm">Casablanca, Maroc</p>
+                                    </div>
+                                </div>
+
+                                <!-- Face arrière -->
+                                <div class="creator-card-back">
+                                    <div class="p-8 h-full flex flex-col justify-between">
+                                        <div>
+                                            <h4 class="text-xl font-bold text-white mb-4">Développeur Full-Stack</h4>
+                                            <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                                                Passionné par le développement web et l'expérience utilisateur, je crée
+                                                des solutions innovantes pour simplifier la vie des étudiants.
+                                                Spécialisé en React, Node.js et design d'interfaces modernes.
+                                            </p>
+                                        </div>
+                                        <div class="grid grid-cols-4 gap-3">
+                                            <a href="mailto:mazgouraabdalmounim@gmail.com"
+                                                class="social-link bg-red-500 hover:bg-red-600">
+                                                <i class="fas fa-envelope text-xl"></i>
+                                            </a>
+                                            <a href="https://www.linkedin.com/in/abd-el-monim-mazgoura-webfullstack/"
+                                                target="_blank" class="social-link bg-blue-600 hover:bg-blue-700">
+                                                <i class="fab fa-linkedin text-xl"></i>
+                                            </a>
+                                            <a href="https://github.com/ABDE777" target="_blank"
+                                                class="social-link bg-gray-800 hover:bg-gray-900">
+                                                <i class="fab fa-github text-xl"></i>
+                                            </a>
+                                            <a href="https://abdelmonim-mazgoura.vercel.app/" target="_blank"
+                                                class="social-link bg-purple-600 hover:bg-purple-700">
+                                                <i class="fas fa-globe text-xl"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 mb-8 overflow-hidden relative">
+                    <h3 class="text-xl font-semibold mb-6 text-green-400 text-center">Technologies utilisées</h3>
+                    <div class="tech-grid">
+                        <div class="tech-card" data-tech="html">
+                            <div class="tech-icon">
+                                <i class="fab fa-html5 text-orange-500"></i>
+                            </div>
+                            <span class="tech-name">HTML5</span>
+                            <div class="tech-glow"></div>
+                        </div>
+                        <div class="tech-card" data-tech="css">
+                            <div class="tech-icon">
+                                <i class="fab fa-css3-alt text-blue-500"></i>
+                            </div>
+                            <span class="tech-name">CSS3</span>
+                            <div class="tech-glow"></div>
+                        </div>
+                        <div class="tech-card" data-tech="js">
+                            <div class="tech-icon">
+                                <i class="fab fa-js-square text-yellow-500"></i>
+                            </div>
+                            <span class="tech-name">JavaScript</span>
+                            <div class="tech-glow"></div>
+                        </div>
+                        <div class="tech-card" data-tech="tailwind">
+                            <div class="tech-icon">
+                                <i class="fas fa-wind text-cyan-500"></i>
+                            </div>
+                            <span class="tech-name">Tailwind CSS</span>
+                            <div class="tech-glow"></div>
+                        </div>
+                        <div class="tech-card" data-tech="chart">
+                            <div class="tech-icon">
+                                <i class="fas fa-chart-bar text-purple-500"></i>
+                            </div>
+                            <span class="tech-name">Chart.js</span>
+                            <div class="tech-glow"></div>
+                        </div>
+                        <div class="tech-card" data-tech="fontawesome">
+                            <div class="tech-icon">
+                                <i class="fab fa-font-awesome text-blue-600"></i>
+                            </div>
+                            <span class="tech-name">Font Awesome</span>
+                            <div class="tech-glow"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- Feedback -->
+                <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-pink-400">Besoin d'aide ou des suggestions ?</h3>
+                    <p class="text-gray-300 mb-4">
+                        Votre feedback est précieux ! N'hésitez pas à me contacter pour toute question, suggestion
+                        d'amélioration ou signalement de bug.
+                    </p>
+                    <div class="flex justify-center">
+                        <button class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors">
+                            <i class="fas fa-comment mr-2"></i>Envoyer un feedback
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="text-center text-gray-400">
+                    <p>&copy; 2024 Student Planner Pro. Créé avec ❤️ pour les étudiants.</p>
+                    <p class="text-sm mt-2">Version 2.1.0 - Tous droits réservés</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+
+    <!-- Task Modal -->
+    <div id="task-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-lg border border-gray-700 w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold">Nouvelle Tâche</h3>
+                    <button id="close-modal" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="task-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Nom de la tâche</label>
+                        <input type="text" id="task-name" required
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Module</label>
+                        <select id="task-module" required
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Priorité</label>
+                        <select id="task-priority"
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                            <option value="low">Basse</option>
+                            <option value="medium">Moyenne</option>
+                            <option value="high">Haute</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Date</label>
+                        <input type="date" id="task-date" required
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Heure</label>
+                        <select id="task-time" required
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                            <option value="00:00">00:00</option>
+                            <option value="00:30">00:30</option>
+                            <option value="01:00">01:00</option>
+                            <option value="01:30">01:30</option>
+                            <option value="02:00">02:00</option>
+                            <option value="02:30">02:30</option>
+                            <option value="03:00">03:00</option>
+                            <option value="03:30">03:30</option>
+                            <option value="04:00">04:00</option>
+                            <option value="04:30">04:30</option>
+                            <option value="05:00">05:00</option>
+                            <option value="05:30">05:30</option>
+                            <option value="06:00">06:00</option>
+                            <option value="06:30">06:30</option>
+                            <option value="07:00">07:00</option>
+                            <option value="07:30">07:30</option>
+                            <option value="08:00">08:00</option>
+                            <option value="08:30">08:30</option>
+                            <option value="09:00">09:00</option>
+                            <option value="09:30">09:30</option>
+                            <option value="10:00">10:00</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:00">20:00</option>
+                            <option value="20:30">20:30</option>
+                            <option value="21:00">21:00</option>
+                            <option value="21:30">21:30</option>
+                            <option value="22:00">22:00</option>
+                            <option value="22:30">22:30</option>
+                            <option value="23:00">23:00</option>
+                            <option value="23:30">23:30</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Durée (minutes)</label>
+                        <input type="number" id="task-duration" min="15" max="480" value="60" required
+                            class="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2">
+                    </div>
+                    <div class="flex space-x-4 pt-4">
+                        <button type="submit"
+                            class="flex-1 bg-blue-600 hover:bg-blue-700 py-2 rounded-lg transition-colors">
+                            Créer
+                        </button>
+                        <button type="button" id="cancel-modal"
+                            class="flex-1 bg-gray-600 hover:bg-gray-700 py-2 rounded-lg transition-colors">
+                            Annuler
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
