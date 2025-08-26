@@ -127,7 +127,7 @@ Pour toute question, suggestion ou problème technique, vous pouvez contacter le
 
 ## 📘 Guide et Roadmap
 
-Pour consulter le guide complet d'utilisation et la roadmap des futures évolutions, veuillez consulter le [Guide OFFPT PRO](guide.html).
+Pour consulter le guide complet d'utilisation et la roadmap des futures évolutions, veuillez consulter le [Guide OFFPT PRO]([guide.html](https://ofppt-pro.vercel.app/guide.html)).
 
 Le guide contient :
 - Des instructions détaillées pour chaque fonctionnalité
@@ -142,3 +142,4 @@ Le guide contient :
 Développé avec ❤️ pour les étudiants OFPPT - © 2025 OFFPT PRO - Version 2.1.0
 
 Cette application est fournie gratuitement pour soutenir la communauté étudiante marocaine.
+
