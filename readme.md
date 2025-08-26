@@ -1,163 +1,425 @@
-OFFPT PRO - Gestion d'Études
-OFFPT PRO est une application web complète de gestion d'études spécialement conçue pour les étudiants de l'OFPPT (Office de la Formation Professionnelle et de la Promotion du Travail) au Maroc. Cette plateforme combine organisation académique, suivi des performances et planification intelligente pour optimiser votre parcours éducatif.
-
-🌟 Fonctionnalités Principales
-📊 Tableau de Bord
-Statistiques en temps réel : Tâches complétées, heures d'étude, moyenne générale et modules actifs
-
-Graphiques interactifs : Répartition des tâches, performance par module, planning journalier et analyse du sommeil
-
-Activité récente : Historique complet de vos actions dans l'application
-
-✅ Gestion des Tâches
-Création et organisation : Ajoutez des tâches avec nom, module, priorité, date et durée
-
-Filtres avancés : Triez par priorité, statut (terminé/en attente) et module
-
-Suivi de progression : Marquez les tâches comme complétées avec horodatage
-
-Système de priorités : Haut, moyen et bas avec code couleur
-
-📅 Planning Intelligent
-Planning journalier : Visualisation horaire de votre journée
-
-Analyse automatique : Répartition du temps (sommeil, école, étude, temps libre)
-
-Navigation par date : Parcourez les jours précédents et suivants
-
-Intégration des tâches : Les tâches programmées s'affichent automatiquement dans le planning
-
-Légende visuelle : Codes couleur pour différents types d'activités
-
-📚 Modules OFPPT
-Catalogue complet : Intégration de tous les modules OFPPT avec codes, coefficients et volumes horaires
-
-Classement intelligent : Modules triés par performance, type EFM et coefficient
-
-Statistiques détaillées : Progression, notes, tâches complétées et heures étudiées
-
-Suivi de progression : Barres de progression visuelles pour chaque module
-
-🎯 Gestion des Notes
-Saisie intuitive : Ajoutez vos notes de contrôles et EFM
-
-Calcul automatique : Moyennes par module et moyenne générale selon le système OFPPT
-
-Validation intelligente : Respect des règles OFPPT (5 contrôles max, 1 EFM, 3 contrôles minimum avant EFM)
-
-Tableau complet : Vue d'ensemble de toutes vos notes organisées par module
-
-⚙️ Paramètres Personnalisables
-Horaires personnels : Heures de réveil et coucher adaptées à votre rythme
-
-Configuration école : Plages horaires des cours et pause déjeuner
-
-Objectifs d'étude : Définissez votre objectif quotidien d'heures d'étude
-
-Gestion des données : Export, import et réinitialisation de vos données
-
-ℹ️ À Propos
-Présentation complète : Découvrez les fonctionnalités et avantages de l'application
-
-Fiche créateur : Carte interactive 3D présentant le développeur
-
-Technologies utilisées : Vue d'ensemble des technologies avec animations 3D
-
-Contact et feedback : Options pour contacter le développeur
-
-🛠️ Technologies Utilisées
-HTML5 : Structure sémantique de l'application
-
-CSS3/Tailwind : Design moderne avec animations avancées et responsive design
-
-JavaScript Vanilla : Logique métier complète sans frameworks
-
-Chart.js : Graphiques et visualisations de données
-
-Font Awesome : Iconographie cohérente et professionnelle
-
-LocalStorage : Sauvegarde locale des données utilisateur
-
-📱 Design et Expérience Utilisateur
-Interface sombre : Confort visuel prolongé, économie d'énergie
-
-Responsive design : Adaptation parfaite desktop, tablette et mobile
-
-Animations fluides : Transitions et effets visuels soignés
-
-Navigation intuitive : Menu latéral mobile et navigation horizontale desktop
-
-Feedback visuel : Notifications toast, couleurs de priorité, états interactifs
-
-🔄 Fonctionnement de l'Application
-Initialisation
-Chargement automatique des données depuis le localStorage
-
-Initialisation des graphiques et des composants
-
-Remplissage des sélecteurs avec les modules OFPPT
-
-Gestion des Données
-Sauvegarde automatique : Après chaque modification importante
-
-Export/Import : Fichiers JSON pour sauvegarder ou transférer vos données
-
-Réinitialisation : Option pour recommencer avec des données vierges
-
-Algorithmes Intelligents
-Calcul des moyennes : Respect strict du système de notation OFPPT
-
-Génération de planning : Adaptation automatique selon vos paramètres
-
-Analyse du sommeil : Recommandations basées sur vos horaires
-
-Classement des modules : Tri intelligent par performance et importance
-
-🎓 Modules OFPPT Intégrés
-L'application inclut tous les modules standards de la formation :
-
-Modules généraux (Français, Anglais, Culture entrepreneuriale...)
-
-Modules techniques (Développement front-end/back-end, Gestion de données...)
-
-Projets et stages (Projet de synthèse, Intégration professionnelle...)
-
-Chaque module contient son code, titre, volume horaire, coefficient et information EFM.
-
-📦 Installation et Utilisation
-Téléchargement : Copiez les fichiers index.html, script.js et style.css
-
-Ouverture : Lancez index.html dans votre navigateur
-
-Configuration initiale : Définissez vos paramètres dans l'onglet ⚙️ Paramètres
-
-Utilisation : Commencez par ajouter vos tâches et notes
-
-💾 Sauvegarde et Sécurité
-Stockage local : Toutes les données restent sur votre appareil
-
-Export régulier : Il est recommandé d'exporter régulièrement vos données
-
-Aucune collecte : Aucune donnée n'est envoyée à des serveurs externes
-
-🔮 Perspectives d'Évolution
-Synchronisation cloud
-
-Notifications push
-
-Application mobile dédiée
-
-Intégration avec calendriers externes
-
-Analytics avancés et rapports détaillés
-
-📞 Support et Contact
-Pour toute question, suggestion ou problème technique, vous pouvez contacter le développeur depuis l'onglet "À propos" ou directement via :
-
-Email : <mazgouraabdalmounim@gmail.com>
-
-LinkedIn : Abd El Monim Mazgoura
-
-Portfolio : <https://abdelmonim-mazgoura.vercel.app/>
-
-Version 2.1.0 - Développé avec ❤️ pour les étudiants OFPPT
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFFPT PRO - Gestion d'Études</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f9c74f;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+            --smooth-transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-bottom: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .version {
+            background: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--smooth-transition);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 0.8rem;
+            font-size: 1.8rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: var(--smooth-transition);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+        
+        .feature-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            background: var(--light);
+            border-radius: 10px;
+            transition: var(--smooth-transition);
+        }
+        
+        .tech-item:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tech-item:hover .tech-icon {
+            color: white;
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .tech-name {
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(67, 97, 238, 0.1) 0%, rgba(58, 12, 163, 0.1) 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--smooth-transition);
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            flex: 1;
+            min-width: 250px;
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>OFFPT PRO - Gestion d'Études</h1>
+            <p class="tagline">Application web complète de gestion d'études spécialement conçue pour les étudiants de l'OFPPT au Maroc</p>
+            <div class="version">Version 2.1.0</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2><i class="fas fa-star"></i> Fonctionnalités Principales</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="feature-title">Tableau de Bord Intelligent</div>
+                    <div class="feature-desc">Statistiques en temps réel, graphiques interactifs et historique complet de vos activités.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-tasks"></i></div>
+                    <div class="feature-title">Gestion des Tâches</div>
+                    <div class="feature-desc">Créez et organisez vos tâches avec système de priorités et filtres avancés.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="feature-title">Planning Intelligent</div>
+                    <div class="feature-desc">Visualisation horaire de votre journée avec analyse automatique du temps.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-book"></i></div>
+                    <div class="feature-title">Modules OFPPT</div>
+                    <div class="feature-desc">Catalogue complet de tous les modules avec coefficients et volumes horaires.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-title">Gestion des Notes</div>
+                    <div class="feature-desc">Saisie intuitive et calcul automatique des moyennes selon le système OFPPT.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-cog"></i></div>
+                    <div class="feature-title">Paramètres Personnalisables</div>
+                    <div class="feature-desc">Adaptez l'application à votre rythme avec des réglages complets.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-laptop-code"></i> Technologies Utilisées</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-html5"></i></div>
+                    <div class="tech-name">HTML5</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-css3-alt"></i></div>
+                    <div class="tech-name">CSS3 / Tailwind</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+                    <div class="tech-name">JavaScript Vanilla</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="tech-name">Chart.js</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fas fa-icons"></i></div>
+                    <div class="tech-name">Font Awesome</div>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon"><i class="fas fa-database"></i></div>
+                    <div class="tech-name">LocalStorage</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-mobile-alt"></i> Design et Expérience Utilisateur</h2>
+            <div class="highlight">
+                <p>Une interface moderne et intuitive spécialement conçue pour optimiser votre productivité et votre confort d'utilisation.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-moon"></i></div>
+                    <div class="feature-title">Interface Sombre</div>
+                    <div class="feature-desc">Confort visuel prolongé et économie d'énergie.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-desktop"></i></div>
+                    <div class="feature-title">Design Responsive</div>
+                    <div class="feature-desc">Adaptation parfaite sur desktop, tablette et mobile.</div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-paint-brush"></i></div>
+                    <div class="feature-title">Animations Fluides</div>
+                    <div class="feature-desc">Transitions et effets visuels soignés pour une expérience agréable.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-download"></i> Installation et Utilisation</h2>
+            <p>OFFPT PRO est une application web qui fonctionne directement dans votre navigateur, sans installation complexe.</p>
+            
+            <div class="highlight">
+                <ol>
+                    <li>Téléchargez les fichiers <strong>index.html</strong>, <strong>script.js</strong> et <strong>style.css</strong></li>
+                    <li>Ouvrez <strong>index.html</strong> dans votre navigateur</li>
+                    <li>Configurez vos paramètres initiaux dans l'onglet ⚙️ Paramètres</li>
+                    <li>Commencez par ajouter vos tâches et notes</li>
+                </ol>
+            </div>
+            
+            <a href="#" class="btn"><i class="fas fa-download"></i> Télécharger l'Application</a>
+        </section>
+
+        <section class="section">
+            <h2><i class="fas fa-info-circle"></i> À Propos et Contact</h2>
+            <p>OFFPT PRO a été développé spécifiquement pour répondre aux besoins des étudiants de l'OFPPT avec une attention particulière portée à l'expérience utilisateur et aux fonctionnalités pratiques.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-user"></i></div>
+                    <div class="feature-title">Développeur</div>
+                    <p>Abd El Monim Mazgoura</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="feature-title">Email</div>
+                    <p>mazgouraabdalmounim@gmail.com</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
+                    <div class="feature-title">LinkedIn</div>
+                    <p>Abd El Monim Mazgoura</p>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-globe"></i></div>
+                    <div class="feature-title">Portfolio</div>
+                    <p>abdelmonim-mazgoura.vercel.app</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Développé avec ❤️ pour les étudiants OFPPT - © 2023 OFFPT PRO</p>
+        </div>
+    </footer>
+</body>
+</html>
